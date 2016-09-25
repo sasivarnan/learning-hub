@@ -1,0 +1,55 @@
+.view-content{
+  box-sizing: border-box;
+  padding-top: 70px;
+  min-height: calc(100vh - 50px);
+}
+
+.footer{
+  height: 50px;
+  padding: 16px;
+  background-color: #f5f5f5;
+}
+
+.path-image{
+  margin-right: 20px;
+  height: 120px;
+  width: 170px;
+}
+
+.tag-icon{
+  padding-right: 10px;
+}
+
+.path-result{
+  margin-top: 12px;
+  min-height: 200px;
+}
+
+.path-tag{
+  cursor: pointer;
+}
+
+.vote-buttons{
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.vote-buttons .glyphicon{
+    font-size: 20px;
+    padding: 4px 10px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.action-bar{
+  display: inline-block;
+  padding: 10px 0px;
+}
+
+.custom-loading{
+  padding: 20px;
+}
+
+.custom-loading-icon{
+  font-size: 50px;
+}

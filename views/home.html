@@ -1,0 +1,85 @@
+<div>
+  <div class="jumbotron">
+    <h1> Learning Hub </h1>
+    <p> One stop hub for all learning paths. </p>
+  </div>
+  <div class="repos" id="search-area">
+    <h1> Search Paths </h1>
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+
+        <div class="input-group">
+          <input class="form-control" type="text" ng-model="selectedTag" uib-typeahead="tag for tag in tags | filter:$viewValue | limitTo:4"
+            placeholder="Search (by Tags)" />
+          <div class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-click="clearSelectedTag()">
+              <span ng-class="selectedTag ? 'glyphicon-remove' : 'glyphicon-search'" class="glyphicon" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <div class="btn-group pull-right" keyboard-nav uib-dropdown dropdown-append-to-body>
+          <button id="btn-append-to-body" type="button" class="btn btn-default" uib-dropdown-toggle>
+            <span class="glyphicon glyphicon-sort" aria-hidden="true"></span> Sort <span class="caret"></span> 
+          </button>
+          <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
+            <li role="menuitem" ng-click="sortPaths('learner', 1)">
+              <a href> <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span> <span> Learners </span> </a>
+            </li>
+            <li role="menuitem" ng-click="sortPaths('learner', -1)">
+              <a href> <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span> <span> Learners </span>                </a>
+            </li>
+            <li class="divider"></li>
+            <li role="menuitem" ng-click="sortPaths('hours', 1)">
+              <a href> <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span> <span> Duration </span> </a>
+            </li>
+            <li role="menuitem" ng-click="sortPaths('hours', -1)">
+              <a href> <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span> <span> Duration </span>                </a>
+            </li>
+            <li class="divider"></li>
+            <li role="menuitem" ng-click="sortPaths('votes', 1)">
+              <a href> <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span> <span> Votes </span> </a>
+            </li>
+            <li role="menuitem" ng-click="sortPaths('votes', -1)">
+              <a href> <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span> <span> Votes </span> </a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="path-result" cg-busy="fetchingPaths">
+      <div class="list-group">
+        <div class="list-group-item" ng-repeat="path in paths | pathFilter:selectedTag">
+          <img class="path-image pull-left" src={{path.image}}>
+          <h4 class="list-group-item-heading">{{path.name}}</h4>
+          <p> {{path.description}} </p>
+          <span class="badge" tooltip-append-to-body=true uib-tooltip="Number of Learners">
+              <span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{path.learner}}
+          </span>
+          <span class="badge" tooltip-append-to-body=true uib-tooltip="Duration in hours">
+              <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> {{path.hours}}
+          </span>
+          <p class="list-group-item-text">
+            <span class="glyphicon glyphicon-tags tag-icon" aria-hidden="true"></span>
+            <span class="path-tag" ng-repeat="tag in path.tags" ng-click="setSelectedTag(tag)"> {{tag}}<span ng-if="!$last">, </span>            </span>
+          </p>
+          <div class="action-bar">
+            <div class="vote-buttons">
+              <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" uib-tooltip="Vote Up" ng-click="votePath(path,1)"></span>
+              <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true" uib-tooltip="Vote Down" ng-click="votePath(path,-1)"></span>
+            </div>
+            <a class="btn btn-primary btn-sm pull-right" target="_blank" href="{{path.sign_up}}">
+              <span class="glyphicon glyphicon-link"></span> View Curriculum
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
